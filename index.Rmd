@@ -1,0 +1,54 @@
+---
+title: "Untitled"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(Lahman)
+library(sqldf)
+library(ggplot2)
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Number 1
+
+```{r}
+
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Number 2
+
+```{r}
+
+query<-"SELECT salary,yearID 
+FROM Salaries
+GROUP BY salary
+HAVING avg(salary)>100000
+ORDER BY avg(salary)"
+
+result<-sqldf(query)
+
+-------
+  
+ggplot()+
+  geom_point(data=result,aes(x=yearID,y=salary))+
+  geom_line(data=result,aes(x=yearID,y=salary))+
+  ggtitle("Salary by year")
+
+```
+
+### Number 3
+
+```{r}
+
+```
+
